@@ -13,7 +13,7 @@ function MovieCard({ movie }) {
     React.createElement(
       "div",
       { className: "movie-poster" },
-      React.createElement("img", { src: movie.url, alt: movie.title }),
+      React.createElement("img", { src: `https://image.tmdb.org/t/p/w500${movie.poster_path}`, alt: movie.title }),
       React.createElement(
         "div",
         { className: "movie-overlay" },
@@ -28,7 +28,7 @@ function MovieCard({ movie }) {
       "div",
       { className: "movie-info" },
       React.createElement("h3", null, movie.title),
-      React.createElement("p", null, movie.release_date)
+      React.createElement("p", null, movie.release_date?.split("-")[0] || "N/A")
     )
   )
 }
