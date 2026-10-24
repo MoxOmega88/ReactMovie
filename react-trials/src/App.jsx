@@ -1,4 +1,4 @@
-import "./App.css";
+import "./css/App.css";
 import React from "react"; 
 import Home from "./pages/Home.jsx";
 import Favorite from "./pages/Favorites.jsx"; 

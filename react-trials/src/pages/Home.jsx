@@ -1,6 +1,7 @@
 import React from "react";
 import MovieCard from "../components/MovieCard";
 import { useState } from "react";
+import "../css/Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,32 +38,27 @@ function Home() {
     movie.title.toLowerCase().startsWith(searchQuery.toLowerCase())
   );
 
-  return React.createElement(
-    "div",
-    { className: "home" },
-    React.createElement(
-      "form",
-      { onSubmit: handleSearchSubmit, className: "search-form" },
-      React.createElement("input", {
-        type: "text",
-        placeholder: "Search for movies...",
-        className: "search-input",
-        value: searchQuery,
-        onChange: (e) => setSearchQuery(e.target.value),
-      }),
-      React.createElement(
-        "button",
-        { type: "submit", className: "search-button" },
-        "Search"
-      )
-    ),
-    React.createElement(
-      "div",
-      { className: "movies-grid" },
-      filteredMovies.map((movie) =>
-        React.createElement(MovieCard, { key: movie.id, movie })
-      )
-    )
+  return (
+    <div className="home">
+      {/* Search Form Box */}
+      <form onSubmit={handleSearchSubmit} className="search-form">
+        <input 
+          type="text" 
+          placeholder="Search for movies..." 
+          className="search-input" 
+          value={searchQuery} 
+          onChange={(e) => setSearchQuery(e.target.value)} 
+        />
+        <button type="submit" className="search-button">Search</button>
+      </form>
+
+      {/* Movies Grid */}
+      <div className="movies-grid">
+        {filteredMovies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </div>
   );
 }
 
