@@ -61,7 +61,7 @@ function Home() {
       finally {
         setLoading(false);
       }
-    setSearchQuery(""); // Clears the box cleanly
+    //setSearchQuery(""); // Clears the box cleanly
   };
 
   // Filter movies safely before mapping them to the UI

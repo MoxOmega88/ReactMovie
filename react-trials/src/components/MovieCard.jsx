@@ -1,36 +1,43 @@
 
-import "../css/MovieCard.css"
-import React from "react"
+import "../css/MovieCard.css";
+import { useMovieContext } from "../contextx/MovieContext";
 
 function MovieCard({ movie }) {
+  const { ifFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
+  const favorite = ifFavorite(movie.id);
 
-  function onFavoriteClick() {
-    alert("clicked")
+  function onFavoriteClick(e) {
+    e.preventDefault();
+    if (favorite) {
+      removeFromFavorites(movie.id);
+    } else {
+      addToFavorites(movie);
+    }
   }
-  return React.createElement(
-    "div",
-    { className: "movie-card" },
-    React.createElement(
-      "div",
-      { className: "movie-poster" },
-      React.createElement("img", { src: `https://image.tmdb.org/t/p/w500${movie.poster_path}`, alt: movie.title }),
-      React.createElement(
-        "div",
-        { className: "movie-overlay" },
-        React.createElement(
-          "button",
-          { className: "favorite-btn", onClick: onFavoriteClick },
-          "♥"
-        )
-      )
-    ),
-    React.createElement(
-      "div",
-      { className: "movie-info" },
-      React.createElement("h3", null, movie.title),
-      React.createElement("p", null, movie.release_date?.split("-")[0] || "N/A")
-    )
-  )
+  return (
+    <div className="movie-card">
+      <div className="movie-poster">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        />
+        <div className="movie-overlay">
+          <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={onFavoriteClick}
+            aria-label={favorite ? `Remove ${movie.title} from favorites` : `Add ${movie.title} to favorites`}
+            aria-pressed={favorite}
+          >
+            ♥
+          </button>
+        </div>
+      </div>
+      <div className="movie-info">
+        <h3>{movie.title}</h3>
+        <p>{movie.release_date?.split("-")[0] || "N/A"}</p>
+      </div>
+    </div>
+  );
 }
 
-export default MovieCard
+export default MovieCard;

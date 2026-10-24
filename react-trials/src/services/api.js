@@ -1,6 +1,6 @@
 //it is better to create a separate file for API calls to keep the code organized and maintainable. This file can contain functions that handle API requests and responses, making it easier to manage and reuse them throughout the application.
 
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const API_KEY = "0023e9e9c118fddcdff1f8418e8a139a";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 if (!API_KEY) {
